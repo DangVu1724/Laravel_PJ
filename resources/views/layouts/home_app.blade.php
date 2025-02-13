@@ -11,7 +11,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-qjIsWkjZoHs7sxZ/N5S5AsnxTzT9XkWBnSPO3TAUYO+yoPks0ne8G/uokObD+abc" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-qjIsWkjZoHs7sxZ/N5S5AsnxTzT9XkWBnSPO3TAUYO+yoPks0ne8G/uokObD+abc" crossorigin="anonymous">
 
 
         

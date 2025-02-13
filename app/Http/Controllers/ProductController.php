@@ -27,9 +27,9 @@ class ProductController extends Controller
         'name' => 'required',
         'price' => 'required|numeric',
         'stock' => 'required|numeric',
-        'category_id' => 'required|array',  // Kiểm tra category_id là mảng
-        'category_id.*' => 'exists:categories,id', // Kiểm tra từng giá trị trong mảng category_id có tồn tại trong bảng categories
-        'image' => 'nullable|image|max:2048', // Kiểm tra ảnh nếu có
+        'category_id' => 'required|array',  
+        'category_id.*' => 'exists:categories,id',
+        'image' => 'nullable|image|max:2048', 
     ]);
 
     // Xử lý ảnh nếu có
@@ -67,21 +67,26 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|array', // Đảm bảo category_id là mảng
+            'category_id.*' => 'exists:categories,id', // Mỗi phần tử phải tồn tại trong bảng categories
             'image' => 'nullable|image|max:2048', // Kiểm tra ảnh nếu có
         ]);
 
-        $data = $request->all();
-        
-        // Xử lý hình ảnh
+        // Cập nhật thông tin sản phẩm
+        $data = $request->except('category_id'); // Loại trừ category_id ra khỏi $data
+
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
         }
 
         $product->update($data);
 
-        return redirect()->route('product.index');
+        // Cập nhật các category liên kết với sản phẩm
+        $product->category()->sync($request->input('category_id'));
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully.');
     }
+
 
     public function destroy(Product $product)
     {

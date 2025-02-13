@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
         'description' => 'A comfortable T-shirt',
         'price' => 20,
         'stock' => 100,
-        'image' => 'img/T-shirt-Nữ.jpg',  
+        'image' => 'images/T-shirt-Nữ.jpg',  
     ]);
 
     $product2 = Product::create([
@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
         'description' => 'Stylish blue jeans',
         'price' => 30,
         'stock' => 50,
-        'image' => 'img/Jeans-Nữ.jpg',  
+        'image' => 'images/Jeans-Nữ.jpg',  
     ]);
 
     $product3 = Product::create([
@@ -35,7 +35,7 @@ class ProductSeeder extends Seeder
         'description' => 'Warm and cozy hoodie',
         'price' => 40,
         'stock' => 80,
-        'image' => 'img/hoodie-nam.jpg',  
+        'image' => 'images/hoodie-nam.jpg',  
     ]);
 
     $product4 = Product::create([
@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
         'description' => 'Comfortable and stylish sweater',
         'price' => 25,
         'stock' => 70,
-        'image' => 'img/Sweater-Nữ.jpg',  
+        'image' => 'images/Sweater-Nữ.jpg',  
     ]);
 
     $product5 = Product::create([
@@ -51,7 +51,7 @@ class ProductSeeder extends Seeder
         'description' => 'Trendy winter jacket',
         'price' => 50,
         'stock' => 40,
-        'image' => 'img/Áokhoác-nam.jpg',  
+        'image' => 'images/Áokhoác-nam.jpg',  
     ]);
 
     $product6 = Product::create([
@@ -59,7 +59,7 @@ class ProductSeeder extends Seeder
         'description' => 'Casual pants for everyday wear',
         'price' => 35,
         'stock' => 60,
-        'image' => 'img/pant-nữ.jpg',  
+        'image' => 'images/pant-nữ.jpg',  
     ]);
 
     $product7 = Product::create([
@@ -67,7 +67,7 @@ class ProductSeeder extends Seeder
         'description' => 'Comfortable sneakers for casual wear',
         'price' => 45,
         'stock' => 90,
-        'image' => 'img/sneaker-nam.jpg',  
+        'image' => 'images/sneaker-nam.jpg',  
     ]);
 
     $product8 = Product::create([
@@ -75,7 +75,7 @@ class ProductSeeder extends Seeder
         'description' => 'Stylish boots for winter',
         'price' => 60,
         'stock' => 50,
-        'image' => 'img/boots-nữ.jpg',  
+        'image' => 'images/boots-nữ.jpg',  
     ]);
 
     $product9 = Product::create([
@@ -83,7 +83,7 @@ class ProductSeeder extends Seeder
         'description' => 'Spacious and stylish tote bag',
         'price' => 25,
         'stock' => 120,
-        'image' => 'img/ToteBag-nữ.jpg',  
+        'image' => 'images/ToteBag-nữ.jpg',  
     ]);
 
     $product10 = Product::create([
@@ -91,7 +91,7 @@ class ProductSeeder extends Seeder
         'description' => 'Durable backpack for daily use',
         'price' => 35,
         'stock' => 80,
-        'image' => 'img/Backpack-nữ.jpg',  
+        'image' => 'images/Backpack-nữ.jpg',  
     ]);
 
     $product11 = Product::create([
@@ -99,7 +99,7 @@ class ProductSeeder extends Seeder
         'description' => 'Trendy cap for casual wear',
         'price' => 15,
         'stock' => 150,
-        'image' => 'img/cap-nam.jpg',  
+        'image' => 'images/cap-nam.jpg',  
     ]);
 
     $product12 = Product::create([
@@ -107,7 +107,7 @@ class ProductSeeder extends Seeder
         'description' => 'Comfortable socks for everyday use',
         'price' => 5,
         'stock' => 200,
-        'image' => 'img/tat-nu.jpg',  
+        'image' => 'images/tat-nu.jpg',  
     ]);
 
         // Gán danh mục cho sản phẩm
