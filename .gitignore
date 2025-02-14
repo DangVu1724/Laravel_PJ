@@ -3,7 +3,7 @@
 /node_modules
 /public/build
 /public/hot
-/public/storage
+
 /storage/*.key
 /vendor
 .env
@@ -29,7 +29,7 @@ bootstrap/compiled.php
 app/storage/
 
 # Laravel 5 & Lumen specific
-public/storage
+
 public/hot
 
 # Laravel 5 & Lumen specific with changed public path
