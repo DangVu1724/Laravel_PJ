@@ -37,6 +37,9 @@ public/hot
 public_html/storage
 public_html/hot
 
+!/public/storage/images
+
+
 storage/*.key
 .env
 Homestead.yaml
