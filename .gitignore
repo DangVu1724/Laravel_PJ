@@ -5,7 +5,6 @@
 /public/hot
 !/public/storage
 !/public/storage/images
-
 /vendor
 .env
 .env.backup
@@ -27,14 +26,13 @@ yarn-error.log
 
 # Laravel 4 specific
 bootstrap/compiled.php
-app/storage/
+
 
 # Laravel 5 & Lumen specific
 
 public/hot
 
 # Laravel 5 & Lumen specific with changed public path
-public_html/storage
 public_html/hot
 !/public/storage
 !/public/storage/images
