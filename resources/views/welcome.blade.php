@@ -147,8 +147,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Đăng nhập</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Đăng ký</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login">Đăng nhập</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register">Đăng ký</a></li>
                 </ul>
             </div>
         </div>
@@ -160,9 +160,8 @@
         <div class="row d-flex justify-content-center">
             @foreach ($products as $product)
             <div class="col-12 col-md-4 mb-4 justify-content-center">
-                <a href="{{route('productDetails',['id' => $product->id])}}" class="text-decoration-none">
                     <div class="card shadow-lg border-0 rounded-3 overflow-hidden text-center" style="width: 90%; max-width: 350px; min-height:100px">
-                        <img src="{{ asset('storage/'.$product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                    <img src="/{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
                         <div class="card-body">
                             <h5 class="card-title text-dark">{{ $product->name }}</h5>
                             <p class="card-text text-muted">
@@ -171,7 +170,6 @@
                             </p>
                         </div>
                     </div>
-                </a>
             </div>
             @endforeach
         </div>

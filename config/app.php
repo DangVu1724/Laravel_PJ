@@ -55,9 +55,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://curly-computing-machine-976grqqvpqx73gvw-8000.app.github.dev'),
 
-    'asset_url' => env('ASSET_URL'),
+    'asset_url' => env('ASSET_URL','https://curly-computing-machine-976grqqvpqx73gvw-8000.app.github.dev'),
 
     /*
     |--------------------------------------------------------------------------

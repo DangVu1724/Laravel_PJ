@@ -11,7 +11,7 @@
     <h1 class="my-4 text-center">Manage Users</h1>
 
     <!-- Thêm sản phẩm -->
-    <a href="{{ route('user.index') }}" class="btn btn-primary mb-3">Add User</a>
+    <a href="{{ config('app.url') }}/admin/user/create" class="btn btn-primary mb-3">Add User</a>
 
     <!-- Bảng sản phẩm -->
     <table class="table table-striped table-hover">

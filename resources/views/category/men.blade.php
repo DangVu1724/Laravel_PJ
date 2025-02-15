@@ -10,7 +10,7 @@
             <div class="col-12 col-md-4 mb-4 d-flex justify-content-center">
                 <a href="{{route('productDetails',['id' => $product->id])}}" class="text-decoration-none">
                     <div class="card shadow-lg border-0 rounded-3 overflow-hidden text-center" style="width: 90%; max-width: 350px; min-height:100px">
-                        <img src="{{ asset('storage/'.$product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                    <img src="/{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
                         <div class="card-body">
                             <h5 class="card-title text-dark">{{ $product->name }}</h5>
                             <p class="card-text text-muted">

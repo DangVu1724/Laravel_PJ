@@ -35,9 +35,14 @@ class ProductController extends Controller
     // Xử lý ảnh nếu có
     $imagePath = null;
     if ($request->hasFile('image')) {
-        // Lưu ảnh vào thư mục public/images và trả về đường dẫn
-        $imagePath = $request->file('image')->store('images', 'public');
+        $image = $request->file('image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('images'), $imageName);
+        $imagePath = 'images/' . $imageName;
+    } else {
+        $imagePath = null;
     }
+    
 
     // Tạo sản phẩm mới với dữ liệu từ form
     $product = Product::create([
@@ -94,4 +99,19 @@ class ProductController extends Controller
 
         return redirect()->route('product.index');
     }
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+
+    // Chỉ tìm các sản phẩm bắt đầu bằng từ khóa
+    $products = Product::where('name', 'like', "{$query}%")
+                       ->orderBy('name')
+                       ->limit(10)
+                       ->get();
+
+    return response()->json($products);
+}
+
+
 }

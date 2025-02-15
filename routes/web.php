@@ -23,8 +23,6 @@ use Illuminate\Http\Request;
 
 Route::get('/', [HomeController::class,'index']);
 
-Route::get('/test',[UserController::class,'getName']) -> name('test');
-
 // Route cho user
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'userDashboard'])->name('dashboard');
@@ -33,6 +31,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/category/women', [DashboardController::class,'women']) -> name('women');
     Route::get('/category/accessories', [DashboardController::class,'accessory']) -> name('accessories');
     Route::get('/category/productDetails/{id}',[DashboardController::class,'details'])->name('productDetails');
+    Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
 
 });
 

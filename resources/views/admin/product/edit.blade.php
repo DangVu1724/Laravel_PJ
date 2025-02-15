@@ -5,7 +5,7 @@
     <h1 class="my-4 text-center">Edit Product</h1>
 
     <!-- Form chỉnh sửa sản phẩm -->
-    <form action="{{ route('product.update', $product) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ config('app.url') }}/admin/product/{{ $product->id }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

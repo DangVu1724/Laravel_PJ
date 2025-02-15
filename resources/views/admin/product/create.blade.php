@@ -2,33 +2,33 @@
 
 @section('content')
 <div class="container">
-    <h1 class="my-4 text-center">Add New Product</h1>
+    <h1 class="my-4 text-center">🛒 Add New Product</h1>
 
     <!-- Form thêm sản phẩm -->
-    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+    <form action="{{ config('app.url') }}/admin/product" method="POST" enctype="multipart/form-data" class="product-form">
+    @csrf
         <div class="form-group">
-            <label for="name">Product Name</label>
+            <label for="name">📦 Product Name</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
 
         <div class="form-group">
-            <label for="price">Price</label>
+            <label for="price">💲 Price</label>
             <input type="number" class="form-control" id="price" name="price" required>
         </div>
 
         <div class="form-group">
-            <label for="stock">Stock</label>
+            <label for="stock">📊 Stock</label>
             <input type="number" class="form-control" id="stock" name="stock" required>
         </div>
 
         <div class="form-group">
-            <label for="image">Product Image</label>
+            <label for="image">🖼️ Product Image</label>
             <input type="file" class="form-control" id="image" name="image">
         </div>
 
         <div class="form-group">
-            <label for="category">Categories</label>
+            <label for="category">🏷️ Categories</label>
             <div class="checkbox-container">
                 @foreach ($categories as $category)
                     <div class="checkbox-item">
@@ -39,106 +39,125 @@
             </div>
         </div>
 
-        <div id="selectedCategories" class="mt-2">
-            <!-- Các category đã được chọn sẽ hiển thị ở đây -->
-        </div>
+        <div id="selectedCategories" class="mt-2"></div>
 
-        <button type="submit" class="btn btn-primary btn-block">Add Product</button>
+        <button type="submit" class="btn btn-submit">➕ Add Product</button>
     </form>
 </div>
 
 <script>
-    // Lắng nghe sự kiện khi checkbox được chọn hoặc bỏ chọn
     document.querySelectorAll('.category-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            updateSelectedCategories();
-        });
+        checkbox.addEventListener('change', updateSelectedCategories);
     });
 
-    // Hàm cập nhật danh sách các category đã chọn
     function updateSelectedCategories() {
-        const selectedCategories = [];
-        document.querySelectorAll('.category-checkbox:checked').forEach(checkbox => {
-            selectedCategories.push(checkbox.nextElementSibling.textContent.trim());
-        });
-
-        // Cập nhật danh sách các category đã chọn
-        const selectedCategoriesDiv = document.getElementById('selectedCategories');
-        if (selectedCategories.length > 0) {
-            selectedCategoriesDiv.innerHTML = 'Selected: ' + selectedCategories.join(', ');
-        } else {
-            selectedCategoriesDiv.innerHTML = 'No categories selected';
-        }
+        const selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked'))
+            .map(cb => cb.nextElementSibling.textContent.trim());
+        document.getElementById('selectedCategories').innerText = selectedCategories.length
+            ? `Selected: ${selectedCategories.join(', ')}`
+            : 'No categories selected';
     }
 </script>
 
 <style>
-    /* CSS Tùy Chỉnh */
-    .category-checkbox {
-        width: 18px; /* Điều chỉnh chiều rộng của checkbox */
-        height: 18px; /* Điều chỉnh chiều cao của checkbox */
-        margin-right: 10px; /* Khoảng cách giữa checkbox và label */
-    }
+body {
+    background-color: #1c1c1c;
+    color: #f0c020;
+    font-family: 'Poppins', sans-serif;
+}
 
-    .dropdown-menu label {
-        font-size: 14px; /* Thay đổi kích thước chữ để dễ nhìn */
-    }
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #2a2a2a;
+    border: 2px solid #f0c020;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(240, 192, 32, 0.5);
+    padding: 30px;
+}
 
-    .checkbox-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px; /* Khoảng cách giữa các checkbox */
-    }
+h1 {
+    color: #f0c020;
+    text-shadow: 2px 2px 4px #000;
+    margin-bottom: 30px;
+}
 
-    .checkbox-item {
-        display: flex;
-        align-items: center;
-    }
+.form-group {
+    margin-bottom: 20px;
+}
 
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
 
-    h1 {
-        color: #343a40;
-        font-size: 2.5rem;
-        margin-bottom: 30px;
-    }
+.form-control {
+    border: 2px solid #f0c020;
+    border-radius: 10px;
+    padding: 12px;
+    background-color: #333;
+    color: #fff;
+}
 
-    .form-group label {
-        font-weight: bold;
-    }
+.form-control::placeholder {
+    color: #aaa;
+}
 
-    .form-control {
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        margin-bottom: 20px;
-    }
+.checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
 
-    .form-group input[type="file"] {
-        padding: 5px;
-        margin-bottom: 20px;
-    }
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    border: 1px solid #f0c020;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
 
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 5px;
-        font-size: 1.1rem;
-    }
+.checkbox-item:hover {
+    transform: scale(1.05);
+}
 
-    .btn-primary:hover {
-        background-color: #0056b3;
-        transition: background-color 0.3s ease;
-    }
+.category-checkbox {
+    margin-right: 10px;
+    accent-color: #f0c020;
+}
 
-    .form-control,
-    .btn {
-        margin-top: 5px;
-    }
+#selectedCategories {
+    margin-top: 15px;
+    font-style: italic;
+    color: #f0c020;
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #f0c020, #e6b800);
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(45deg, #e6b800, #f0c020);
+}
+
+.btn-submit:active {
+    transform: translateY(2px);
+}
 </style>
 @endsection

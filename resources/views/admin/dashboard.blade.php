@@ -1,25 +1,27 @@
 @extends('layouts.admin_app')
 
-
 @section('content')
 <head>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <div class="container mt-5">
-    <h1 class="text-center mb-4 text-primary">Welcome to Admin Dashboard</h1>
+    <h1 class="text-center mb-5 text-primary">Welcome to Admin Dashboard</h1>
 
     <div class="row g-4">
         <!-- Quản lý sản phẩm -->
         <div class="col-md-6 d-flex justify-content-center">
-            <a href="{{ route('product.index') }}" class="btn btn-lg btn-primary shadow-lg rounded-pill w-75 py-3">
+            <a href="{{ config('app.url') }}/admin/product" class="btn btn-lg btn-primary shadow-lg custom-btn w-75 py-3">
                 <i class="bi bi-box-seam me-2"></i> Manage Products
             </a>
         </div>
 
         <!-- Quản lý người dùng -->
         <div class="col-md-6 d-flex justify-content-center">
-            <a href="{{ route('user.index') }}" class="btn btn-lg btn-secondary shadow-lg rounded-pill w-75 py-3">
+            <a href="{{ config('app.url') }}/admin/user" class="btn btn-lg btn-secondary shadow-lg custom-btn w-75 py-3">
                 <i class="bi bi-people-fill me-2"></i> Manage Users
             </a>
         </div>
@@ -29,47 +31,71 @@
 <!-- Thêm CSS -->
 <style>
     body {
-        background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
-        font-family: 'Arial', sans-serif; /* Font chữ đơn giản */
-    }
-
-    h1 {
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng chữ */
-    }
-
-    .btn {
-        border: #007bff;
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-
-    .btn:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border-radius: 10px;
-        padding: 5px;
-    }
-
-    .btn-secondary {
-        background-color: #6c757d;
-        border-radius: 10px;
-        padding: 5px;
-    }
-
-    .btn i {
-        font-size: 1.2rem;
+        background: linear-gradient(135deg, #6e45e2, #88d3ce);
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .container {
         background-color: #ffffff;
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        padding: 40px 30px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        transition: transform 0.5s;
+    }
+
+    .container:hover {
+        transform: translateY(-10px);
+    }
+
+    h1 {
+        font-weight: 700;
+        color: #343a40;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .custom-btn {
+        border-radius: 50px;
+        transition: all 0.4s ease;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .custom-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+    }
+
+    .custom-btn:hover::before {
+        transform: translateX(100%);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border: none;
+    }
+
+    .btn-secondary {
+        background: linear-gradient(135deg, #6c757d, #495057);
+        border: none;
+    }
+
+    .btn i {
+        font-size: 1.5rem;
     }
 
     .row {

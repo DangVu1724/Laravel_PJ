@@ -6,7 +6,7 @@
     <div class="product-detail-content">
         <!-- Ảnh sản phẩm lớn bên trái -->
         <div class="product-image">
-            <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" class="img-fluid">
+        <img src="/{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
         </div>
 
         <!-- Thông tin sản phẩm bên phải -->
@@ -21,6 +21,25 @@
             <h4 class="product-price">Price: ${{ number_format($product->price, 2) }}</h4>
             <p class="product-stock">Stock: {{ $product->stock }}</p>
             <p class="product-description">{{ $product->description }}</p>
+
+            <!-- Tùy chọn chọn size -->
+            <div class="product-size">
+                <h5>Choose Size:</h5>
+                <div class="size-options">
+                    <label class="size-option">
+                        <input type="radio" name="size" value="S" checked> S
+                    </label>
+                    <label class="size-option">
+                        <input type="radio" name="size" value="M"> M
+                    </label>
+                    <label class="size-option">
+                        <input type="radio" name="size" value="L"> L
+                    </label>
+                    <label class="size-option">
+                        <input type="radio" name="size" value="XL"> XL
+                    </label>
+                </div>
+            </div>
 
             <!-- Nút thêm vào giỏ hàng và mua ngay -->
             <div class="product-actions">
@@ -57,7 +76,6 @@
     } 
 
     .product-image {
-        
         text-align: center;
     }
 
@@ -65,6 +83,7 @@
         max-height: 400px;
         object-fit: cover;
         width: 100%;
+        border-radius: 15px;
     }
 
     .product-info {
@@ -97,6 +116,28 @@
         font-size: 1.1rem;
         color: #333;
         margin-top: 20px;
+    }
+
+    .product-size {
+        margin-top: 20px;
+    }
+
+    .size-options {
+        display: flex;
+        gap: 15px;
+    }
+
+    .size-option {
+        border: 2px solid #007bff;
+        border-radius: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .size-option:hover {
+        background-color: #007bff;
+        color: #fff;
     }
 
     .product-actions {
