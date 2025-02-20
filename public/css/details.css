@@ -1,0 +1,140 @@
+.product-detail-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+}
+
+.product-image {
+    flex: 1;
+    text-align: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.product-category,
+.product-stock,
+.product-description {
+    font-size: 1rem;
+    color: #555;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    color: #dc3545;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.product-size {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.size-options {
+    display: flex;
+    gap: 10px;
+}
+
+.size-option {
+    padding: 8px 15px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.size-option:hover,
+.size-option input:checked+label {
+    background-color: #007bff;
+    color: white;
+}
+
+.product-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.add-to-cart {
+    background-color: #007bff;
+    color: white;
+}
+
+.add-to-cart:hover {
+    background-color: #0056b3;
+}
+
+.buy-now {
+    background-color: #28a745;
+    color: white;
+}
+
+.buy-now:hover {
+    background-color: #218838;
+}
+
+.product-extra-info {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.product-extra-info h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.product-actions form {
+    margin: 0;
+}
+
+.product-actions .btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}

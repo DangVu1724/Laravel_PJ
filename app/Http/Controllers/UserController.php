@@ -30,9 +30,11 @@ class UserController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
+            'role' => $request->role ?? 'user',
         ]);
 
-        return redirect()->route('user.index')->with('sucess','User created successfully');
+        return redirect()->route('user.index')->with('success','User created successfully');
+
 
     }
 
@@ -41,15 +43,32 @@ class UserController extends Controller
         return view('admin.user.edit',compact('user'));
     }
 
-    public function update(Request $request,$id) {
+    public function update(Request $request, $id) {
         $user = User::findOrFail($id);
+    
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8',
+            'role' => 'required|in:user,admin',
         ]);
-        $user->update($validated);
+    
+        $updateData = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'role' => $validated['role'],
+        ];
+    
+        // Nếu có mật khẩu mới thì mã hóa
+        if (!empty($validated['password'])) {
+            $updateData['password'] = bcrypt($validated['password']);
+        }
+    
+        $user->update($updateData);
+    
         return redirect()->route('user.index')->with('success', 'User updated successfully.');
     }
+    
 
     public function destroy(User $user) {
         $user->delete();

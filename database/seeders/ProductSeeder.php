@@ -111,17 +111,21 @@ class ProductSeeder extends Seeder
     ]);
 
         // Gán danh mục cho sản phẩm
-        $product1->category()->attach([4, 2]); // Gán danh mục "Áo thun" và "Nam" cho sản phẩm "T-shirt"
-        $product2->category()->attach([7, 3]); // Gán danh mục "Quần" và "Nữ" cho sản phẩm "Jeans"
-        $product3->category()->attach([5, 1]); // Gán danh mục "Áo hoodie" và "Nam" cho sản phẩm "Hoodie"
-        $product4->category()->attach([6, 2]); // Gán danh mục "Áo Sweater" và "Nữ" cho sản phẩm "Sweater"
-        $product5->category()->attach([12, 1]); // Gán danh mục "Áo khoác" và "Nam" cho sản phẩm "Jacket"
-        $product6->category()->attach([7, 2]); // Gán danh mục "Quần" và "Nữ" cho sản phẩm "Pants"
-        $product7->category()->attach([8, 1]); // Gán danh mục "Phụ kiện" và "Nam" cho sản phẩm "Sneakers"
-        $product8->category()->attach([8, 1]); // Gán danh mục "Phụ kiện" và "Nam" cho sản phẩm "Boots"
-        $product9->category()->attach([8, 2]); // Gán danh mục "Phụ kiện" và "Nữ" cho sản phẩm "Tote Bag"
-        $product10->category()->attach([8, 2]); // Gán danh mục "Phụ kiện" và "Nữ" cho sản phẩm "Backpack"
-        $product11->category()->attach([14, 1]); // Gán danh mục "Mũ" và "Nam" cho sản phẩm "Cap"
-        $product12->category()->attach([15, 2]); // Gán danh mục "Tất" và "Nữ" cho sản phẩm "Socks"
+        // Gán lại danh mục sản phẩm
+$product1->category()->attach([4, 1]); // "Áo thun" và "Nam"
+$product2->category()->attach([7, 2]); // "Quần" và "Nữ"
+$product3->category()->attach([5, 1]); // "Áo hoodie" và "Nam"
+$product4->category()->attach([6, 2]); // "Áo Sweater" và "Nữ"
+$product5->category()->attach([11, 1]); // "Áo khoác" và "Nam"
+$product6->category()->attach([7, 2]); // "Quần" và "Nữ"
+
+// Chuyển tất cả các sản phẩm thuộc "Mũ" và "Tất" sang "Phụ kiện"
+$product7->category()->attach([8, 1]); // "Phụ kiện" và "Nam" cho "Sneakers"
+$product8->category()->attach([8, 1]); // "Phụ kiện" và "Nam" cho "Boots"
+$product9->category()->attach([8, 2]); // "Phụ kiện" và "Nữ" cho "Tote Bag"
+$product10->category()->attach([8, 2]); // "Phụ kiện" và "Nữ" cho "Backpack"
+$product11->category()->attach([8, 1]); // "Phụ kiện" và "Nam" cho "Cap" (trước là Mũ)
+$product12->category()->attach([8, 2]); // "Phụ kiện" và "Nữ" cho "Socks" (trước là Tất)
+
     }
 }

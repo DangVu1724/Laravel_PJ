@@ -35,13 +35,12 @@
         font-family: 'Roboto', sans-serif;
         color: #333;
         min-height: 100vh;
-        display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .container {
-        background-color: #ffffff;
+        background: linear-gradient(135deg, #6e45e2, #88d3ce);
         border-radius: 20px;
         padding: 40px 30px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);

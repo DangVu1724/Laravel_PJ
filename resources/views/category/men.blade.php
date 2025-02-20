@@ -1,21 +1,25 @@
 @extends('layouts.home_app')
 
 @section('content')
+<div class="search-container mb-4">
+        <input type="text" name="query" id="searchInput" class="form-control rounded-pill" placeholder="Tìm kiếm sản phẩm..." value="{{ request('query') }}">
+    <!-- Kết quả tìm kiếm hiển thị ở đây -->
+    <div id="searchResults" class="search-results position-absolute w-100 bg-black border rounded shadow-sm d-none mt-2">
+    <!-- Kết quả tìm kiếm sẽ được thêm vào đây -->
+</div></div>
 <div class="outer-container d-flex align-items-center justify-content-center">
     <div class="container text-center">
-        <h1 class="mb-5 text-primary">Các sản phẩm cho Men</h1>
-
-        <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
             @foreach ($products as $product)
             <div class="col-12 col-md-4 mb-4 d-flex justify-content-center">
-                <a href="{{route('productDetails',['id' => $product->id])}}" class="text-decoration-none">
-                    <div class="card shadow-lg border-0 rounded-3 overflow-hidden text-center" style="width: 90%; max-width: 350px; min-height:100px">
+            <a href="{{ config('app.url') }}/category/productDetails/{{ $product->id }}" class="text-decoration-none">
+            <div class="card shadow-lg border-0 rounded-3 overflow-hidden text-center" style="width: 90%; max-width: 350px; min-height:100px">
                     <img src="/{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
-                        <div class="card-body">
+                    <div class="card-body">
                             <h5 class="card-title text-dark">{{ $product->name }}</h5>
                             <p class="card-text text-muted">
                                 <strong>Price:</strong> ${{ number_format($product->price, 2) }} <br>
-                                <strong>Stock:</strong> {{ $product->stock }} <br>
+                                <strong>Description:</strong> {{ $product->description }} <br>
                             </p>
                         </div>
                     </div>

@@ -6,141 +6,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to FashionShop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
+        .footer {
+    background-color: #222;
+    color: #fff;
+    padding: 40px 0;
+    font-family: Arial, sans-serif;
+}
 
-        .navbar {
-            background-color: #343a40;
-        }
+.footer-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
 
-        .navbar a {
-            color: white;
-        }
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+}
 
-        .navbar-toggler-icon {
-            background-color: white;
-        }
+.footer-col {
+    width: 30%;
+    margin-bottom: 20px;
+}
 
-        .navbar-nav .nav-item .nav-link {
-            color: #fff !important;
-        }
+.footer-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
 
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #ffc107 !important;
-        }
+.footer-text {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
 
-        .outer-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-color: #f8f9fa;
-        padding: 20px;
-    }
+.footer-link {
+    color: #f8c12c;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
 
-    .container {
-        max-width: 1200px;
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-    }
+.footer-link:hover {
+    color: #ffdd57;
+}
 
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: start;
-    }
+.footer-social {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 
-    .card {
-        transition: transform 0.3s ease-in-out;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        max-width: 350px;
-        height: 450px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-    }
+.footer-social a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
 
-    .card-img-top {
-        height: 320px;
-        object-fit: cover;
-        width: 100%;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-    }
+.footer-social i {
+    font-size: 16px;
+}
 
-    .card-body {
-        padding: 1rem;
-        text-align: center;
-        flex-grow: 1; 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+.footer-line {
+    border: 1px solid #444;
+    margin: 20px 0;
+}
 
-    .card-title {
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-    }
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-    .card-text {
-        font-size: 1rem;
-        color: #555;
-        margin-bottom: 20px;
-        line-height: 1.6;
-    }
-
-    .card-text strong {
-        font-weight: bold;
-    }
-
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    @media (min-width: 768px) {
-        .col-md-4 {
-            flex: 0 0 32%;
-            max-width: 32%;
-        }
-    }
-
-    @media (max-width: 767px) {
-        .col-12 {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-    }
-
-    a.text-decoration-none {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    a.text-decoration-none:hover {
-        text-decoration: none;
-    }
+.footer-bottom .footer-link {
+    margin-left: 15px;
+}
     </style>
 </head>
+
 
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid"> <!-- Change container to container-fluid -->
-            <a class="navbar-brand" href="#">FashionShop</a>
+            <a class="navbar-brand" href="#">Elara Couture</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -155,28 +112,89 @@
     </nav>
 
     <div class="outer-container d-flex align-items-center justify-content-center">
-    <div class="container text-center">
+        <div class="container text-center">
 
-        <div class="row d-flex justify-content-center">
-            @foreach ($products as $product)
-            <div class="col-12 col-md-4 mb-4 justify-content-center">
-                    <div class="card shadow-lg border-0 rounded-3 overflow-hidden text-center" style="width: 90%; max-width: 350px; min-height:100px">
-                    <img src="/{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
-                        <div class="card-body">
-                            <h5 class="card-title text-dark">{{ $product->name }}</h5>
-                            <p class="card-text text-muted">
-                                <strong>Price:</strong> ${{ number_format($product->price, 2) }} <br>
-                                <strong>Description:</strong> {{ $product->description }} <br>
-                            </p>
+            <div class="row d-flex justify-content-center">
+                @foreach ($products as $product)
+                    <div class="col-12 col-md-4 mb-4 justify-content-center">
+                        <div class="card shadow-lg border-0 rounded-3 overflow-hidden text-center"
+                            style="width: 90%; max-width: 350px; min-height:100px">
+                            <img src="/{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark">{{ $product->name }}</h5>
+                                <p class="card-text text-muted">
+                                    <strong>Price:</strong> ${{ number_format($product->price, 2) }} <br>
+                                    <strong>Description:</strong> {{ $product->description }} <br>
+                                </p>
+                            </div>
                         </div>
                     </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
     </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<footer>
+
+    <div class="footer-container">
+        <div class="footer-row">
+            <!-- Cột thông tin cửa hàng -->
+            <div class="footer-col">
+                <h5 class="footer-title">Elara Couture</h5>
+                <p class="footer-text">Chuyên cung cấp các sản phẩm chất lượng với giá cả hợp lý.</p>
+                <p class="footer-text">Địa chỉ: Hà Nội, Việt Nam</p>
+            </div>
+
+            <!-- Cột liên hệ -->
+            <div class="footer-col">
+                <h5 class="footer-title">Liên Hệ</h5>
+                <p class="footer-text">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:0123456789" class="footer-link">0123 456 789</a>
+                </p>
+                <p class="footer-text">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:info@yourshop.com" class="footer-link">ElaraCouture@shop.com</a>
+                </p>
+                <p class="footer-text">
+                    <i class="fas fa-clock"></i> Thời gian mở cửa: 8:00 - 22:00 (Hằng ngày)
+                </p>
+            </div>
+
+            <!-- Cột mạng xã hội -->
+            <div class="footer-col">
+                <h5 class="footer-title">Kết Nối Với Chúng Tôi</h5>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/yourshop" class="footer-link" target="_blank">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                    <a href="https://www.instagram.com/yourshop" class="footer-link" target="_blank">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://www.tiktok.com/@yourshop" class="footer-link" target="_blank">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </a>
+                    <a href="https://www.youtube.com/c/yourshop" class="footer-link" target="_blank">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="footer-line">
+
+        <div class="footer-bottom">
+            <p class="footer-text">&copy; 2024 Your Shop. All rights reserved.</p>
+            <div>
+                <a href="#" class="footer-link">Chính sách bảo mật</a>
+                <a href="#" class="footer-link">Điều khoản sử dụng</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
 
 </html>

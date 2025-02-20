@@ -1,9 +1,13 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
+<form method="POST" action="{{ config('app.url') . route('password.store', [], false) }}">
+
         @csrf
+        
+
 
         <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+        <input type="hidden" name="token" value="{{ config('app.url') . $request->route('token') }}">
+
 
         <!-- Email Address -->
         <div>

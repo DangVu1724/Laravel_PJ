@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CartController;
+
 
 
 /*
@@ -32,6 +34,10 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/category/accessories', [DashboardController::class,'accessory']) -> name('accessories');
     Route::get('/category/productDetails/{id}',[DashboardController::class,'details'])->name('productDetails');
     Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
+    Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
 });
 

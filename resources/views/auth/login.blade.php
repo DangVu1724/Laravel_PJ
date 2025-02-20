@@ -40,7 +40,7 @@
 
             @if (Route::has('password.request'))
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                href="{{ route('password.request') }}">
+            href="{{ config('app.url') }}/password">
                 {{ __('Forgot your password?') }}
             </a>
             @endif
@@ -55,7 +55,7 @@
         <div class="flex items-center justify-center mt-6 space-x-6 ">
             <p class="text-gray-700 dark:text-gray-300">Don't have an account?</p>
             <a class="underline text-sm text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                href="{{ route('register') }}">
+            href="{{ config('app.url') }}/register">
                 Register
             </a>
 

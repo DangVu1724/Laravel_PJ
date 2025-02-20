@@ -63,14 +63,19 @@ class DashboardController extends Controller
     }
 
     public function details($id)
-    {
-        $product = Product::with('category')->find($id);
+{
+    $product = Product::with('category')->find($id);
 
-
-        if (!$product) {
-            abort(404, 'Product not found');
-        }
-
-        return view('category.productDetails', compact('product'));
+    if (!$product) {
+        abort(404, 'Product not found');
     }
+
+    // Giải mã JSON để lấy danh sách size
+    $sizes = $product->size ? json_decode($product->size, true) : [];
+
+    return view('category.productDetails', compact('product', 'sizes'));
+}
+
+
+    
 }
