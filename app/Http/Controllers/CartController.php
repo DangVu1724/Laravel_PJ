@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
+
+
 
 class CartController extends Controller
 {
@@ -12,56 +15,80 @@ class CartController extends Controller
     public function addToCart(Request $request, $id)
     {
         $product = Product::findOrFail($id);
+        $userId = Auth::id(); // Nếu user chưa đăng nhập, có thể set null
         $size = $request->input('size', 'S');
 
-        $cart = Session::get('cart', []);
+        // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
+        $cartItem = Cart::where('user_id', $userId)
+            ->where('product_id', $id)
+            ->where('size', $size)
+            ->first();
 
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity'] += 1;
+        if ($cartItem) {
+            $cartItem->quantity += 1;
+            $cartItem->save();
         } else {
-            $cart[$id] = [
-                'name' => $product->name,
-                'price' => $product->price,
+            Cart::create([
+                'user_id' => $userId,
+                'product_id' => $id,
                 'image' => $product->image,
+                'name' => $product->name,
                 'size' => $size,
-                'quantity' => 1
-            ];
+                'quantity' => 1,
+                'price' => $product->price
+            ]);
         }
 
-        Session::put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart!');
+        return back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
     }
 
-    // Xem giỏ hàng
+    // Hiển thị giỏ hàng
     public function viewCart()
     {
-        $cart = Session::get('cart', []);
-        return view('cart', compact('cart'));
+        $userId = Auth::id();
+        $cart = Cart::where('user_id', $userId)->with('product')->get();
+        $total = $cart->sum(fn($item) => $item->quantity * $item->price);
+
+        return view('cart', compact('cart', 'total'));
     }
 
-    // Xóa sản phẩm khỏi giỏ hàng
-    public function removeFromCart($id)
-    {
-        $cart = Session::get('cart', []);
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            Session::put('cart', $cart);
-        }
-        return redirect()->route('cart.view')->with('success', 'Product removed from cart!');
-    }
-
+    // Cập nhật số lượng sản phẩm
     public function update(Request $request, $id)
     {
-        $cart = session()->get('cart', []);
+        // Kiểm tra xem sản phẩm có trong giỏ hàng không
+        $cartItem = Cart::where('id', $id)->where('user_id', Auth::id())->first();
 
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity'] = $request->quantity;
-            session()->put('cart', $cart);
+        if (!$cartItem) {
+            return response()->json(['success' => false, 'message' => 'Product not found'], 404);
         }
 
-        $total = array_sum(array_map(fn($item) => $item['quantity'] * $item['price'], $cart));
+        // Cập nhật số lượng sản phẩm
+        $cartItem->quantity = $request->quantity;
+        $cartItem->save();
+
+        // Tính lại tổng giá trị giỏ hàng
+        $total = Cart::where('user_id', Auth::id())->sum(DB::raw('quantity * price'));
 
         return response()->json(['success' => true, 'total' => number_format($total, 2)]);
     }
 
+
+
+
+
+
+
+    // Xóa sản phẩm khỏi giỏ hàng
+    public function removeFromCart($id)
+    {
+        Cart::destroy($id);
+        return redirect()->route('cart.view')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng!');
+    }
+
+    // Xóa toàn bộ giỏ hàng
+    public function clearCart()
+    {
+        Cart::where('user_id', Auth::id())->delete();
+        return redirect()->route('cart.view')->with('success', 'Giỏ hàng đã được làm trống!');
+    }
 }

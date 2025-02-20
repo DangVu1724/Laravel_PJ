@@ -1,12 +1,6 @@
 @extends('layouts.home_app')
 
 @section('content')
-
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-qjIsWkjZoHs7sxZ/N5S5AsnxTzT9XkWBnSPO3TAUYO+yoPks0ne8G/uokObD+abc" crossorigin="anonymous">
-
-    </head>
     <div class="container mt-5">
         <h1 class="text-center mb-4">🛒 Your Shopping Cart</h2>
 
@@ -15,10 +9,16 @@
             @endif
 
             @if(empty($cart))
-                <div class="text-center">
-                    <img src="/images/empty-cart.png" alt="Empty Cart" class="img-fluid" width="250">
-                    <p class="mt-3">Your cart is empty. <a href="/" class="btn btn-primary">Continue Shopping</a></p>
+                <div class="cart-container">
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    <p class="cart-text">Your cart is empty.</p>
+                    <a href="/dashboard" class="continue-btn">
+                        Continue Shopping
+                    </a>
                 </div>
+
+
+
             @else
                 <div class="table-responsive">
                     <table class="table table-hover text-center">
@@ -33,6 +33,10 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <?php
+                            $price = 0;
+                            $total = 0;
+                        ?>
                         <tbody>
                             @foreach($cart as $id => $item)
                                 <tr>
@@ -47,14 +51,18 @@
                                         ${{ number_format($item['price'], 2) }}
                                     </td>
                                     <td class="align-middle text-center">
-                                        <input type="number" class="form-control text-center quantity-input border-primary"
-                                            value="{{ $item['quantity'] }}" min="1" data-id="{{ $id }}" style="width: 70px;">
+                                    <input type="number" class="quantity-input" data-id="{{ $item->id }}" value="{{ $item->quantity }}">
+
                                     </td>
                                     <td class="align-middle fw-bold text-primary text-center total">
-                                        ${{ number_format($item['quantity'] * $item['price'], 2) }}
+                                        <?php
+                                        $price = number_format($item['quantity'] * $item['price'], 2);
+                                        $total += $price;
+                                        ?>
+                                        <?php echo $price; ?>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <form action="{{ config('app.url') . '/cart/remove/' . $id }}" method="POST">
+                                        <form action="{{ config('app.url') }}/cart/remove/{{ $item->id }}" method="POST">
                                             @csrf
                                             <button type="submit" class="btn btn-sm btn-outline-danger">
                                                 🗑 Xóa
@@ -69,14 +77,14 @@
 
 
                 <div class="checkout-container">
-                    <h4>Total:
-                        <span class="cart-total">
-                            ${{ number_format(array_sum(array_map(fn($item) => $item['quantity'] * $item['price'], $cart)), 2) }}
-                        </span>
-                    </h4>
-                    <form action="/checkout" method="GET">
-                        <button type="submit" class="btn-checkout">Thanh Toán</button>
-                    </form>
+                <h4>Total:
+    <span class="cart-total">${{ number_format($total, 2) }}</span>
+</h4>
+
+<a href="{{ config('app.url') }}/order" class="btn-checkout">Thanh Toán</a>
+
+                        
+                    
                 </div>
 
 
@@ -84,47 +92,53 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const quantityInputs = document.querySelectorAll(".quantity-input");
+         const baseUrl = "{{ config('app.url') }}";
+    document.addEventListener("DOMContentLoaded", function () {
+    const quantityInputs = document.querySelectorAll(".quantity-input");
 
-            quantityInputs.forEach(input => {
-                input.addEventListener("change", function () {
-                    const row = this.closest("tr");
-                    const price = parseFloat(row.querySelector(".price").textContent.replace("$", ""));
-                    const totalCell = row.querySelector(".total");
-                    const newQuantity = parseInt(this.value);
+    quantityInputs.forEach(input => {
+        input.addEventListener("change", function () {
+            const row = this.closest("tr");
+            const price = parseFloat(row.querySelector(".price").textContent.replace("$", ""));
+            const totalCell = row.querySelector(".total");
+            const newQuantity = parseInt(this.value);
+            const productId = this.dataset.id;
 
-                    if (newQuantity < 1) {
-                        this.value = 1; // Không cho phép số lượng nhỏ hơn 1
-                        return;
-                    }
-
-                    const newTotal = (newQuantity * price).toFixed(2);
-                    totalCell.textContent = `$${newTotal}`;
-
-                    // Gửi AJAX request để cập nhật số lượng trong session
-                    const productId = this.dataset.id;
-                    updateCartQuantity(productId, newQuantity);
-                });
-            });
-
-            function updateCartQuantity(productId, quantity) {
-                fetch(`{{ config('app.url') }}/cart/update/${productId}`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    body: JSON.stringify({ quantity: quantity })
-                }).then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            document.querySelector(".cart-total").textContent = `$${data.total}`;
-                        }
-                    });
+            if (newQuantity < 1) {
+                this.value = 1;
+                return;
             }
+
+            const newTotal = (newQuantity * price).toFixed(2);
+            totalCell.textContent = `$${newTotal}`;
+
+            // Gửi AJAX request bằng POST
+            updateCartQuantity(productId, newQuantity);
         });
-    </script>
+    });
+
+    function updateCartQuantity(productId, quantity) {
+        fetch(`${baseUrl}/cart/update/${productId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+            },
+            body: JSON.stringify({ quantity: quantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.querySelector(".cart-total").textContent = `$${data.total}`;
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
+});
+
+</script>
+
+
 
     <style>
         .table-responsive {
@@ -226,6 +240,45 @@
 
         .checkout-container .btn-checkout:hover {
             background-color: #218838;
+        }
+
+        /* Căn giữa nội dung */
+        .cart-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Icon giỏ hàng */
+        .cart-icon {
+            font-size: 80px;
+            color: #999;
+        }
+
+        /* Văn bản thông báo */
+        .cart-text {
+            font-size: 20px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Nút Continue Shopping */
+        .continue-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hiệu ứng hover */
+        .continue-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
         }
     </style>
 @endsection
