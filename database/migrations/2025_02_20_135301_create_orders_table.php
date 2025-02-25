@@ -12,13 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->integer('quantity');
-            $table->decimal('total_price', 10, 2);
-            $table->enum('status', ['In Progress', 'Completed', 'Cancelled'])->default('In Progress');
-            $table->timestamps();
+            $table->id(); // ID đơn hàng
+            $table->unsignedBigInteger('user_id')->nullable(); // ID người dùng (nếu có đăng nhập)
+            $table->string('status')->default('pending'); // Trạng thái đơn hàng (ví dụ: pending, processing, completed)
+            $table->decimal('total', 10, 2); // Tổng tiền đơn hàng
+            $table->timestamps(); // created_at và updated_at
         });
     }
 

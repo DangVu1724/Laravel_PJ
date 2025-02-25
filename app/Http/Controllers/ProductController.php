@@ -28,10 +28,6 @@ class ProductController extends Controller
         return view('admin.product.index', compact('products', 'categories'));
     }
     
-    
-
-
-
 
     public function create()
     {

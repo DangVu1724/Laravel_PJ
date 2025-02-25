@@ -18,49 +18,136 @@ class DashboardController extends Controller
         return view('admin.dashboard');
     }
 
-    public function index()
-    {
-        $products = Product::all();
-        return view('dashboard', compact('products'));
-    }
+    public function index(Request $request)
+{
+    $query = Product::query();
 
-    public function men()
-    {
-        // Tìm danh mục "Men"
-        $category = Category::where('name', 'Men')->first();
-
-        // Nếu không tìm thấy danh mục, trả về thông báo hoặc view rỗng
-        if (!$category) {
-            return view('category.men', ['products' => []]);
+    // Phân loại theo giá
+    if (!$request->has('sort') || $request->sort === 'default') {
+        $query->orderBy('created_at', 'desc');
+    } else {
+        switch ($request->sort) {
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'name_asc':
+                $query->orderBy('name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('name', 'desc');
+                break;
         }
-
-        // Lấy tất cả sản phẩm thuộc danh mục "Men"
-        $products = $category->products()->distinct()->get();
-
-        return view('category.men', compact('products'));
     }
-    public function women()
-    {
-        $category =Category::where('name','Women') ->first();
 
-        if(!$category){
-            return view('category.women',['products'=>[]]);
+    $products = $query->get();
+    return view('dashboard', compact('products'));
+}
+
+public function men(Request $request)
+{
+    $category = Category::where('name', 'Men')->first();
+
+    if (!$category) {
+        return view('category.men', ['products' => []]);
+    }
+
+    $query = $category->products();
+
+    if (!$request->has('sort') || $request->sort === 'default') {
+        $query->orderBy('created_at', 'desc');
+    } else {
+        switch ($request->sort) {
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'name_asc':
+                $query->orderBy('name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('name', 'desc');
+                break;
         }
-
-        $products = $category->products()->distinct()->get();
-        return view('category.women', compact('products'));
     }
-    public function accessory()
-    {
-        $category =Category::where('name','Accessories') ->first();
 
-        if(!$category){
-            return view('category.accessories',['products'=>[]]);
+    $products = $query->distinct()->get();
+
+    return view('category.men', compact('products'));
+}
+
+public function women(Request $request)
+{
+    $category = Category::where('name', 'Women')->first();
+
+    if (!$category) {
+        return view('category.women', ['products' => []]);
+    }
+
+    $query = $category->products();
+
+    if (!$request->has('sort') || $request->sort === 'default') {
+        $query->orderBy('created_at', 'desc');
+    } else {
+        switch ($request->sort) {
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'name_asc':
+                $query->orderBy('name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('name', 'desc');
+                break;
         }
-
-        $products = $category->products()->distinct()->get();
-        return view('category.accessories', compact('products'));
     }
+
+    $products = $query->distinct()->get();
+
+    return view('category.women', compact('products'));
+}
+
+public function accessory(Request $request)
+{
+    $category = Category::where('name', 'Accessories')->first();
+
+    if (!$category) {
+        return view('category.accessories', ['products' => []]);
+    }
+
+    $query = $category->products();
+
+    if (!$request->has('sort') || $request->sort === 'default') {
+        $query->orderBy('created_at', 'desc');
+    } else {
+        switch ($request->sort) {
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'name_asc':
+                $query->orderBy('name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('name', 'desc');
+                break;
+        }
+    }
+
+    $products = $query->distinct()->get();
+
+    return view('category.accessories', compact('products'));
+}
+
 
     public function details($id)
 {

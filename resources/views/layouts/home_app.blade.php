@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-qjIsWkjZoHs7sxZ/N5S5AsnxTzT9XkWBnSPO3TAUYO+yoPks0ne8G/uokObD+abc" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/home_app.css') }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-qjIsWkjZoHs7sxZ/N5S5AsnxTzT9XkWBnSPO3TAUYO+yoPks0ne8G/uokObD+abc" crossorigin="anonymous">
+        <script src="{{ asset('css/home_app.css') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.4/css/foundation.min.css">
 
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100">
+        @include('layouts.nav_home')
 
-        
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.nav_home')
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+        <!-- Page Content -->
+        <main>
 
-            <!-- Page Content -->
-            <main>
             @yield('content')
-            </main>
-        </div>
-        <script src="{{ asset('js/home_app.js') }}"></script>
-    </body>
-    <footer class="footer">
+        </main>
+    </div>
+    <script src="{{ asset('js/home_app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.4/js/foundation.min.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+    <script>
+        document.getElementById('filter').addEventListener('change', function () {
+            const sortValue = this.value;
+            if (sortValue === 'default') {
+                window.location.href = "{{ config('app.url') }}/dashboard"; // Quay về mặc định
+            } else {
+                window.location.href = "{{ config('app.url') }}/dashboard?sort=" + sortValue;
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<footer class="footer">
     <div class="footer-container">
         <div class="footer-row">
             <!-- Cột thông tin cửa hàng -->
@@ -56,11 +73,11 @@
             <div class="footer-col">
                 <h5 class="footer-title">Liên Hệ</h5>
                 <p class="footer-text">
-                    <i class="fas fa-phone-alt"></i> 
+                    <i class="fas fa-phone-alt"></i>
                     <a href="tel:0123456789" class="footer-link">0123 456 789</a>
                 </p>
                 <p class="footer-text">
-                    <i class="fas fa-envelope"></i> 
+                    <i class="fas fa-envelope"></i>
                     <a href="mailto:info@yourshop.com" class="footer-link">ElaraCouture@shop.com</a>
                 </p>
                 <p class="footer-text">
@@ -100,7 +117,7 @@
     </div>
 </footer>
 
-    <script>
+<script>
     const baseUrl = "{{ config('app.url') }}";
 </script>
 <script src="{{ asset('js/home_app.js') }}"></script>

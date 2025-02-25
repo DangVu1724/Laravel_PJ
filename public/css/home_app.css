@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 .search-container {
     margin-top:20px;
     position: relative;
@@ -111,7 +115,7 @@
         justify-content: space-between;
         width: 100%;
         max-width: 350px;
-        height: 450px;
+        height: 500px;
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         background-color: #fff;
@@ -293,4 +297,77 @@
     .footer-bottom .footer-link {
         margin: 5px 0;
     }
+}
+
+/* Căn chỉnh danh sách dropdown */
+.dropdown-pane ul {
+    padding-left: 0; /* Bỏ padding mặc định */
+    list-style: none; /* Bỏ dấu chấm trước mỗi mục */
+}
+
+/* Căn chỉnh từng mục trong dropdown */
+.dropdown-pane ul li a {
+    display: flex;
+    align-items: center; /* Icon và chữ thẳng hàng */
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333; /* Màu chữ mặc định */
+}
+
+/* Cách giữa icon và chữ */
+.dropdown-pane ul li a i {
+    margin-right: 8px;
+}
+
+/* Hiệu ứng hover */
+.dropdown-pane ul li a:hover {
+    background-color: #f4f4f4; /* Màu nền khi hover */
+    color: #000; /* Đổi màu chữ khi hover */
+}
+
+/* Chỉnh style cho nút "Sắp xếp" */
+.button.dropdown {
+    background-color: #fdfdfd; /* Màu xanh */
+    color: #000000; /* Chữ trắng */
+    border-radius: 20px; /* Bo tròn */
+    border: none; /* Bỏ viền */
+    padding: 10px 20px; /* Căn chỉnh padding */
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa icon và chữ */
+    transition: 0.3s;
+}
+
+/* Hiệu ứng hover */
+.button.dropdown:hover {
+    background-color: #000000; /* Màu xanh đậm hơn */
+    color: #ddd;
+}
+
+/* Khi bấm vào */
+.button.dropdown:active {
+    background-color: #003f7f;
+}
+
+/* Chỉnh kích thước và màu của icon */
+.button.dropdown i {
+    font-size: 24px; /* Làm icon to hơn */
+    color: #ffcc00; /* Màu vàng */
+    transition: 0.3s;
+}
+
+/* Khi hover, đổi màu icon */
+.button.dropdown:hover i {
+    color: #ff9900; /* Màu cam */
+}
+
+
+.description-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* Đảm bảo không bị tràn */
 }

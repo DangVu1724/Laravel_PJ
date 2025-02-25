@@ -138,3 +138,82 @@
     border-radius: 5px;
     font-weight: bold;
 }
+
+
+.review-form {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    gap: 5px;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 26px;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.rating input:checked~label,
+.rating label:hover,
+.rating label:hover~label {
+    color: gold;
+}
+
+.review {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.stars {
+    font-size: 22px;
+    color: #ffcc00;
+}
+
+.filled-star {
+    color: gold;
+}
+
+.empty-star {
+    color: #ccc;
+}
+
+.review-text {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+[type=checkbox] + label,
+[type=radio] + label {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: 0 !important;
+    margin-right: 1rem;
+    margin-bottom: 0;
+}
+label {
+    font-size: 18px;
+}

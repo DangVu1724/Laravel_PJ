@@ -7,39 +7,36 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     </head>
-    <div class="search-container mb-4">
-        <input type="text" name="query" id="searchInput" class="form-control rounded-pill"
-            placeholder="Tìm kiếm sản phẩm..." value="{{ request('query') }}">
-        <!-- Kết quả tìm kiếm hiển thị ở đây -->
-        <div id="searchResults"
-            class="search-results position-absolute w-100 bg-black border rounded shadow-sm d-none mt-2">
-            <!-- Kết quả tìm kiếm sẽ được thêm vào đây -->
+    <div class="grid-x grid-margin-x align-center">
+        <!-- Thanh tìm kiếm -->
+        <div class="cell medium-5">
+            <div class="search-container">
+                <input type="text" name="query" id="searchInput" class="input-group-field rounded"
+                    placeholder="Tìm kiếm sản phẩm..." value="{{ request('query') }}">
+                <div id="searchResults"
+                    class="search-results position-absolute w-100 bg-black border rounded shadow-sm d-none mt-2">
+                    <!-- Kết quả tìm kiếm sẽ được thêm vào đây -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Dropdown sắp xếp -->
+        <div class="cell medium-2 text-center" style="
+        margin-top: 18px;">
+            <button class="button hollow dropdown" type="button" data-toggle="filterDropdown">
+                <i class="fas fa-filter"></i> Sắp xếp
+            </button>
+            <div class="dropdown-pane" id="filterDropdown" data-dropdown data-hover="true" data-hover-pane="true">
+                <ul class="no-bullet">
+                    <li><a href="?sort=default"><i class="fas fa-list-ul"></i> Mặc định</a></li>
+                    <li><a href="?sort=price_asc"><i class="fas fa-sort-up"></i> Giá: Thấp đến cao</a></li>
+                    <li><a href="?sort=price_desc"><i class="fas fa-sort-down"></i> Giá: Cao đến thấp</a></li>
+                    <li><a href="?sort=name_asc"><i class="fas fa-sort-alpha-up"></i> Tên: A-Z</a></li>
+                    <li><a href="?sort=name_desc"><i class="fas fa-sort-alpha-down"></i> Tên: Z-A</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-
-
-    <!-- <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="/images/cap-nam.jpg" class="d-block w-100" alt="Slide 1">
-            </div>
-            <div class="carousel-item">
-                <img src="/images/cap-nam.jpg" class="d-block w-100" alt="Slide 2">
-            </div>
-            <div class="carousel-item">
-                <img src="/images/cap-nam.jpg" class="d-block w-100" alt="Slide 3">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div> -->
-
     <div class="outer-container d-flex align-items-center justify-content-center">
         <div class="container text-center">
 
@@ -55,7 +52,8 @@
                                     <h5 class="card-title text-dark">{{ $product->name }}</h5>
                                     <p class="card-text text-muted">
                                         <strong>Price:</strong> ${{ number_format($product->price, 2) }} <br>
-                                        <strong>Description:</strong> {{ $product->description }} <br>
+                                        <strong>Description:</strong> <span class="description-text">{{ $product->description }}</span> 
+
                                     </p>
                                 </div>
                             </div>
@@ -65,11 +63,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 
 
 

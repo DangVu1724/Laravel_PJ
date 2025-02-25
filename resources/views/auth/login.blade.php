@@ -2,15 +2,15 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
 
-    <form method="POST" action="login">
-        @csrf
-        
+    <form method="POST" action="/login">
+    @csrf
+
 
         <!-- Email Address -->
         <div>
@@ -40,15 +40,16 @@
             </label>
 
             @if (Route::has('password.request'))
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-            href="{{ config('app.url') }}/password">
-                {{ __('Forgot your password?') }}
-            </a>
+                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                    href="{{ config('app.url') }}/password">
+                    {{ __('Forgot your password?') }}
+                </a>
             @endif
         </div>
 
         <div class="flex flex-col items-center justify-between mt-4 space-y-4">
-            <x-primary-button class="w-full py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center justify-center">
+            <x-primary-button
+                class="w-full py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center justify-center">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
@@ -56,7 +57,7 @@
         <div class="flex items-center justify-center mt-6 space-x-6 ">
             <p class="text-gray-700 dark:text-gray-300">Don't have an account?</p>
             <a class="underline text-sm text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-            href="{{ config('app.url') }}/register">
+                href="{{ config('app.url') }}/register">
                 Register
             </a>
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use App\Models\Product;
 
 
 
@@ -17,6 +18,10 @@ class CartController extends Controller
         $product = Product::findOrFail($id);
         $userId = Auth::id(); // Nếu user chưa đăng nhập, có thể set null
         $size = $request->input('size', 'S');
+
+        if ((int) $product->stock <= 0) {
+            return back()->with('error', 'Sản phẩm đã hết hàng!');
+        }
 
         // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
         $cartItem = Cart::where('user_id', $userId)
@@ -35,7 +40,7 @@ class CartController extends Controller
                 'name' => $product->name,
                 'size' => $size,
                 'quantity' => 1,
-                'price' => $product->price
+                'price' => (float) $product->price,
             ]);
         }
 
@@ -47,7 +52,9 @@ class CartController extends Controller
     {
         $userId = Auth::id();
         $cart = Cart::where('user_id', $userId)->with('product')->get();
-        $total = $cart->sum(fn($item) => $item->quantity * $item->price);
+        $total = $cart->sum(fn($item) => $item->quantity * floatval($item->price));
+
+
 
         return view('cart', compact('cart', 'total'));
     }
@@ -67,7 +74,7 @@ class CartController extends Controller
         $cartItem->save();
 
         // Tính lại tổng giá trị giỏ hàng
-        $total = Cart::where('user_id', Auth::id())->sum(DB::raw('quantity * price'));
+        $total = Cart::where('user_id', Auth::id())->get()->sum(fn($item) => $item->quantity * floatval($item->price));
 
         return response()->json(['success' => true, 'total' => number_format($total, 2)]);
     }

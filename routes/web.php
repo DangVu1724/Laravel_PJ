@@ -9,6 +9,9 @@ use App\Http\Controllers\ProductController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminOrderController;
 
 
 
@@ -25,6 +28,9 @@ use App\Http\Controllers\CartController;
 
 Route::get('/', [HomeController::class,'index']);
 
+
+
+
 // Route cho user
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'userDashboard'])->name('dashboard');
@@ -39,6 +45,12 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
     Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+    Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');
+    Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place.order');
+    Route::get('/orders', [OrderController::class, 'userOrders'])->name('orders.list');
+    Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+
+
 
 });
 
@@ -47,6 +59,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::resource('admin/product', ProductController::class);
     Route::resource('admin/user', UserController::class);
+    Route::patch('/admin/orders/{id}/update', [AdminOrderController::class, 'update'])->middleware('admin');
+    Route::get('/admin/user/{id}/orders', [AdminOrderController::class, 'index'])->name('admin.user.orders');
+    Route::post('/admin/user/orders/updateStatus/{id}', [AdminOrderController::class, 'updateStatus'])
+    ->name('admin.order.updateStatus');
+
+
 });
 
 // Profile routes (chung cho tất cả authenticated users)

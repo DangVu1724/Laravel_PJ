@@ -34,6 +34,12 @@
             </select>
             </div>
 
+            <div class="form-group">
+    <label for="description">📝 Description</label>
+    <textarea class="form-control" id="description" name="description" value="{{ $product->description }}" rows="4" required></textarea>
+</div>
+
+
 
         <div class="form-group">
             <label for="image">Product Image</label>
@@ -47,7 +53,7 @@
                 @foreach ($categories as $category)
                 <div class="checkbox-item">
                     <input type="checkbox" name="category_id[]" value="{{ $category->id }}" class="category-checkbox"
-                        {{ $product->category->contains($category->id) ? 'checked' : '' }}>
+                        {{ $product->category->contains($category->id) ? 'checked' : '' }} >
                     <label>{{ $category->name }}</label>
                 </div>
                 @endforeach
