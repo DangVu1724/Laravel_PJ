@@ -28,9 +28,6 @@ use App\Http\Controllers\AdminOrderController;
 
 Route::get('/', [HomeController::class,'index']);
 
-
-
-
 // Route cho user
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'userDashboard'])->name('dashboard');
