@@ -92,10 +92,11 @@ Truy cập tại: https://curly-computing-machine-976grqqvpqx73gvw-8000.app.gith
 ## ⚠️ Lưu ý
 - Đảm bảo mở kết nối đến cơ sở dữ liệu trên Aiven.
 - Bảo mật các biến môi trường khi deploy lên server.
-## Sơ đồ Usecase tổng quan
+## 📷 Sơ đồ Usecase tổng quan
+
 ![image](https://github.com/user-attachments/assets/6abf2593-f649-4862-8874-a82c61838096)
 
-## Hình ảnh
+## 📷 Hình ảnh
 **1. Đăng nhập**
 Màn hình đăng nhập cho phép người dùng nhập email và mật khẩu.
 
@@ -122,6 +123,7 @@ Giao diện quản lý người dùng cho phép quản trị viên xem và chỉ
 
 **5. Quản lý sản phẩm**
 Giao diện quản lý sản phẩm, nơi quản trị viên có thể thêm, sửa, hoặc xóa sản phẩm.
+
 ![image](https://github.com/user-attachments/assets/cf1974d9-3823-4ee0-ae48-325283a15da7)
 
 
