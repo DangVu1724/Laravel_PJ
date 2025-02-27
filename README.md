@@ -3,6 +3,7 @@
 
 
 **Github**: https://github.com/DangVu1724/Laravel_PJ.git
+
 **Readme**: https://dangvu1724.github.io/Laravel_PJ/
 
 ## 🌐 Giới thiệu
@@ -14,7 +15,7 @@
 - **Frontend:** HTML, CSS, JavaScript (Bootstrap)
 - **Authentication:** Laravel Breeze
 - **Deployment:** Github CodeSpace
-- 
+  
 ## 🚀 Chức năng chính
 ### 🛍️ Người dùng
 - Xem danh sách sản phẩm
