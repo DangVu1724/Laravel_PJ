@@ -1,9 +1,12 @@
 # 🛒 Clothing Store
 
-## 🌐 Giới thiệu
-Đây là một website bán quần áo trực tuyến được xây dựng bằng framework PHP Laravel, sử dụng cơ sở dữ liệu trên nền tảng Aiven Cloud. Website cho phép người dùng duyệt sản phẩm, tìm kiếm, phân loại và đặt hàng. Quản trị viên có thể quản lý người dùng, sản phẩm và các danh mục liên quan.
+
 
 **Github**: https://github.com/DangVu1724/Laravel_PJ.git
+**Readme**: https://dangvu1724.github.io/Laravel_PJ/
+
+## 🌐 Giới thiệu
+Đây là một website bán quần áo trực tuyến được xây dựng bằng framework PHP Laravel, sử dụng cơ sở dữ liệu trên nền tảng Aiven Cloud. Website cho phép người dùng duyệt sản phẩm, tìm kiếm, phân loại và đặt hàng. Quản trị viên có thể quản lý người dùng, sản phẩm và các danh mục liên quan.
 
 ## ⚙️ Công nghệ sử dụng
 - **Backend:** PHP Laravel
